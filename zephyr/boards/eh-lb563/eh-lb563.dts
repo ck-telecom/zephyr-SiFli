@@ -1,0 +1,73 @@
+/*
+ * Copyright (c) 2017 Linaro Limited
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/dts-v1/;
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <zephyr/dt-bindings/gpio/gpio.h>
+#include <sf32lb56.dtsi>
+
+/ {
+	model = "SiFli EH-LB563 board";
+	compatible = "sifli,sf32lb563";
+
+	chosen {
+		zephyr,console = &usart1;
+		zephyr,shell-uart = &usart1;
+		zephyr,sram = &sram0;
+		zephyr,flash = &psram1;
+	};
+
+//	leds: leds {
+//		compatible = "gpio-leds";
+//		green_led_2: led_2 {
+//			gpios = <&gpioa 5 GPIO_ACTIVE_HIGH>;
+//			label = "User LD2";
+//		};
+//	};
+
+//	gpio_keys {
+//		compatible = "gpio-keys";
+//		user_button: button {
+//			label = "User";
+//			gpios = <&gpioa 13 GPIO_ACTIVE_LOW>;
+//			zephyr,code = <INPUT_KEY_0>;
+//		};
+//	};
+
+	aliases {
+		//led0 = &green_led_2;
+		//sw0 = &user_button;
+		volt-sensor0 = &vref;
+		volt-sensor1 = &vbat;
+	};
+};
+
+&clk_rc48k {
+	status = "okay";
+};
+
+&pll {
+	clocks = <&clk_xtal48>;
+	status = "okay";
+};
+
+&rcc {
+	clocks = <&pll>;
+	clock-frequency = <DT_FREQ_M(240)>;
+	ahb-prescaler = <1>;
+	apb1-prescaler = <1>;
+	apb2-prescaler = <1>;
+};
+
+&usart1 {
+	//pinctrl-0 = <&usart1_tx_pa9 &usart1_rx_pa10>;
+	//pinctrl-names = "default";
+	current-speed = <1000000>;
+	status = "okay";
+};
+
+
+

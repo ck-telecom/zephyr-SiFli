@@ -1,0 +1,10 @@
+family:
+- name: sf32lb
+  series:
+  - name: sf32lb56x
+    socs:
+    - name: sf32lb561
+    - name: sf32lb563
+    - name: sf32lb566
+    - name: sf32lb567
+ 

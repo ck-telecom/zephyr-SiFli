@@ -1,0 +1,34 @@
+# SiFli SF32LB56X MCU line
+
+# Copyright (c) 2016 Open-RnD Sp. z o.o.
+# Copyright (c) 2016 BayLibre, SAS
+# Copyright (c) 2019 Centaur Analytics, Inc
+# Copyright (c) 2019 STMicroelectronics
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_SERIES_SF32LB56X
+	bool
+	select SOC_FAMILY_SF32LB
+
+config SOC_SERIES
+	default "sf32lb56x" if SOC_SERIES_SF32LB56X
+
+config SOC_SF32LB561
+	bool
+	select SOC_SERIES_SF32LB56X
+config SOC_SF32LB563
+	bool
+	select SOC_SERIES_SF32LB56X
+config SOC_SF32LB566
+	bool
+	select SOC_SERIES_SF32LB56X
+config SOC_SF32LB567
+	bool
+	select SOC_SERIES_SF32LB56X
+    
+config SOC
+	default "sf32lb561" if SOC_SF32LB561
+	default "sf32lb563" if SOC_SF32LB563
+	default "sf32lb565" if SOC_SF32LB566
+	default "sf32lb567" if SOC_SF32LB567
+

@@ -1,0 +1,18 @@
+identifier: eh-lb563
+name: Sifli EH-LB563 HDK
+type: mcu
+arch: arm
+toolchain:
+  - zephyr
+  - gnuarmemb
+supported:
+  - pwm
+  - gpio
+  - dma
+  - spi
+  - i2c
+  - counter
+  - adc
+ram: 800
+flash: 1024
+vendor: sifli

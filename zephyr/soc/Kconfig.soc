@@ -1,0 +1,11 @@
+# SiFli SF32LB56X all MCU lines
+# Copyright (c) 2016 Open-RnD Sp. z o.o.
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_SF32LB
+	bool
+
+config SOC_FAMILY
+	default "sf32lb56x" if SOC_SERIAL_SF32LB56X
+
+rsource "*/Kconfig.soc"

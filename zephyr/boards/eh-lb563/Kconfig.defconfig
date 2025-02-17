@@ -1,0 +1,11 @@
+# EH-LB563 Sifli HDK 563
+
+# Copyright (c) 2025 Sifli Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+if BOARD_SIFLI_EH_LB563
+config BSP_USING_BOARD_EH_LB563XXX
+    bool 
+    default y
+endif # BOARD_SIFLI_EH_LB563
+

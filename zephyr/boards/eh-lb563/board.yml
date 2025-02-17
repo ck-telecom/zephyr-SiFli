@@ -1,0 +1,6 @@
+board:
+  name: eh-lb563
+  full_name: EH LB563
+  vendor: sifli
+  socs:
+    - name: sf32lb563
