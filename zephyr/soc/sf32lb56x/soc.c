@@ -28,6 +28,19 @@ extern void sf32lb_power_init(void);
  */
 void soc_early_init_hook(void)
 {
+    #ifdef SCB_EnableICache
+    /* Enable I-Cache---------------------------------------------------------*/
+    SCB_EnableICache();
+#endif
+
+#ifdef SCB_EnableDCache
+    /* Enable D-Cache---------------------------------------------------------*/
+    SCB_EnableDCache();
+#endif
+
+    /* HAL_Init() function is called at the beginning of the program */
+    HAL_Init();
+
     // TODO
 #if CONFIG_PM
 	sf32lb_power_init();

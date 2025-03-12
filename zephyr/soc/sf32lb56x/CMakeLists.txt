@@ -17,21 +17,7 @@ zephyr_sources_ifdef(CONFIG_PM
 
 zephyr_sources_ifdef(CONFIG_POWEROFF poweroff.c)
 
-
-file(GLOB SF32LB_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/../../../boards/common/*.c")
-foreach(FILE ${SF32LB_SOURCES})
-    zephyr_sources(${FILE})
-endforeach()
-
-file(GLOB SF32LB_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/../../../boards/eh-lb56xu/*.c")
-foreach(FILE ${SF32LB_SOURCES})
-    zephyr_sources(${FILE})
-endforeach()
-
-
 zephyr_include_directories(.)
-zephyr_include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../drivers/cmsis/sf32lb56x)
-zephyr_include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../boards/include/config/sf32lb56x)
-zephyr_include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../boards/eh-lb56xu)
+zephyr_include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../SifliSDK/drivers/cmsis/sf32lb56x)
 
 set(SOC_LINKER_SCRIPT ${ZEPHYR_BASE}/include/zephyr/arch/arm/cortex_m/scripts/linker.ld CACHE INTERNAL "")

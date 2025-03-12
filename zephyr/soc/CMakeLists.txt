@@ -6,9 +6,9 @@ zephyr_compile_definitions(
   -D__HAL_ROM_USED=  
   -DUSE_HAL_DRIVER  
 )
-zephyr_include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../drivers/include)
-zephyr_include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../drivers/cmsis/include)
-zephyr_include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../boards/include)
+zephyr_include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../SifliSDK/drivers/include)
+zephyr_include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../SifliSDK/drivers/cmsis/include)
+zephyr_include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../SifliSDK/customer/boards/include)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../drivers drivers)
 add_subdirectory(${SOC_SERIES})
 
