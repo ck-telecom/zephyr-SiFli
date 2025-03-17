@@ -1,5 +1,8 @@
+clone this project to <zephyrproject>\modules\hal\sifli
 
 Directory contains all the driver and devicetree provided by SiFli
 
 Build with west 
 west build -b <board> <project>  -- -DBOARD_ROOT=<zephyrproject>\modules\hal\sifli\zephyr -DSOC_ROOT=<zephyrproject>\modules\hal\sifli\zephyr  -DDTS_ROOT_BINDINGS=<zephyrproject>\modules\hal\sifli\zephyr\dts\bindings
+
+Currently board support eh-lb563
