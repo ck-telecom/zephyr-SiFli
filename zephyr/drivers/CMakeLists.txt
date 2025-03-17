@@ -35,7 +35,12 @@ if (CONFIG_SOC_SERIES_SF32LB56X)
     zephyr_code_relocate(FILES ../../SifliSDK/drivers/cmsis/sf32lb56x/bf0_pin_const.c LOCATION RAM NOKEEP)
 endif()
 
-
+if (CONFIG_SOC_SERIES_SF32LB52X)
+	zephyr_library_sources("../../SifliSDK/drivers/cmsis/sf32lb52x/Templates/system_bf0_ap.c")
+	zephyr_library_sources("../../SifliSDK/drivers/cmsis/sf32lb52x/bt_rf_fulcal.c")
+	zephyr_library_sources("../../SifliSDK/drivers/cmsis/sf32lb52x/bf0_pin_const.c")
+    zephyr_code_relocate(FILES ../../SifliSDK/drivers/cmsis/sf32lb52x/bf0_pin_const.c LOCATION RAM NOKEEP)
+endif()
 
 zephyr_library_sources_ifdef(CONFIG_GPIO sflb32_gpio.c)
 zephyr_library_sources_ifdef(CONFIG_CONSOLE sflb32_console.c)

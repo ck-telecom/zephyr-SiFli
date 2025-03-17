@@ -11,5 +11,6 @@ config CODE_DATA_RELOCATION_SRAM
 
 config SOC_FAMILY
 	default "sf32lb56x" if SOC_SERIAL_SF32LB56X
+	default "sf32lb52x" if SOC_SERIAL_SF32LB52X
 
 rsource "*/Kconfig.soc"

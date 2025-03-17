@@ -1,0 +1,8 @@
+# Copyright (c) 2016 BayLibre, SAS
+# SPDX-License-Identifier: Apache-2.0
+
+config BOARD_SIFLI_EM_LB525
+	bool 
+	default y
+	select SOC_SF32LB525
+	

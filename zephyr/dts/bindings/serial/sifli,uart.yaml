@@ -14,7 +14,7 @@ properties:
   current-speed:
     description: |
       Initial baud rate setting for UART. Defaults to standard baudrate of 115200 if not specified.
-    default: 115200
+    default: 1000000
 
   stop-bits:
     description: |

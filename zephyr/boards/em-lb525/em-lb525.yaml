@@ -1,0 +1,18 @@
+identifier: em-lb525
+name: Sifli EM-LB525 Module
+type: mcu
+arch: arm
+toolchain:
+  - zephyr
+  - gnuarmemb
+supported:
+  - pwm
+  - gpio
+  - dma
+  - spi
+  - i2c
+  - counter
+  - adc
+ram: 512
+flash: 16384
+vendor: sifli

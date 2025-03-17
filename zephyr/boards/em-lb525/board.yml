@@ -1,0 +1,6 @@
+board:
+  name: em-lb525
+  full_name: EM LB525
+  vendor: sifli
+  socs:
+    - name: sf32lb525

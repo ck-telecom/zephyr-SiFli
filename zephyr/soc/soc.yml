@@ -7,4 +7,9 @@ family:
     - name: sf32lb563
     - name: sf32lb566
     - name: sf32lb567
- 
+  - name: sf32lb52x
+    socs:
+    - name: sf32lb520
+    - name: sf32lb523
+    - name: sf32lb525
+    - name: sf32lb527
