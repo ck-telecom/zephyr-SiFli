@@ -25,8 +25,10 @@ zephyr_code_relocate(FILES ../../SifliSDK/drivers/hal/bf0_hal_hpaon.c LOCATION R
 zephyr_code_relocate(FILES ../../SifliSDK/drivers/hal/bf0_hal_pinmux.c LOCATION RAM NOKEEP)
 zephyr_code_relocate(FILES ../../SifliSDK/drivers/hal/bf0_hal_gpio.c LOCATION RAM NOKEEP)
 zephyr_code_relocate(FILES ../../SifliSDK/drivers/hal/flash_table.c LOCATION RAM NOKEEP)
-zephyr_code_relocate(FILES ../../SifliSDK/drivers/hal/bf0_hal.c FILTER ".*\\.HAL_Init|.*\\.HAL_Delay_us|.*\\.HAL_Delay_us_|.*\\.HAL_MspInit" LOCATION 
-RAM NOKEEP)
+zephyr_code_relocate(FILES ../../SifliSDK/drivers/hal/bf0_hal.c FILTER ".*\\.HAL_Init|.*\\.HAL_PostMspInit|.*\\.HAL_Delay|.*\\.HAL_Delay_us|.*\\.HAL_Delay_us_" LOCATION RAM NOKEEP) 
+zephyr_code_relocate(FILES ../../SifliSDK/drivers/hal/bf0_hal_pmu.c FILTER ".*\\.HAL_PMU_SET_HXT_CBANK|.*\\.HAL_PMU_GetHpsysVoutRef|.*\\.HAL_PMU_GetHpsysVoutRef2" LOCATION RAM NOKEEP)
+zephyr_code_relocate(FILES ../../SifliSDK/drivers/hal/bf0_sys_cfg.c FILTER ".*\\BSP_HxtCbank_Config" LOCATION RAM NOKEEP)
+
 
 if (CONFIG_SOC_SERIES_SF32LB56X)
 	zephyr_library_sources("../../SifliSDK/drivers/cmsis/sf32lb56x/Templates/system_bf0_ap.c")

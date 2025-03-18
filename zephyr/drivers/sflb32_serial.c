@@ -194,7 +194,7 @@ static int uart_sf32lb_init(const struct device *dev)
     uart->handle.Init.Mode         = UART_MODE_TX_RX;
     uart->handle.Init.OverSampling = UART_OVERSAMPLING_16;
     
-	config->irq_config_func(dev);
+	  config->irq_config_func(dev);
     sifli_configure(dev);
     return 0;
 }
@@ -316,7 +316,7 @@ static void uart_isr(const struct device *dev)
 // Interrupt service routine
 static void uart_sf32lb_isr(const struct device *dev)
 {
-    
+    __asm("B .");
 }
 
 #define SF32LB_UART_IRQ_HANDLER_DECL(index)				\
@@ -338,7 +338,7 @@ static void uart_sf32lb_irq_config_func_##index(const struct device *dev)	\
 #define SF32LB_UART_INIT(index)						\
 SF32LB_UART_IRQ_HANDLER_DECL(index)					\
 \
-static struct uart_config uart_cfg_##index = {				\
+static const struct uart_config uart_cfg_##index = {				\
 	.baudrate   = 1000000,		\
 	.parity     = UART_CFG_PARITY_NONE,			            \
 	.stop_bits  = UART_CFG_STOP_BITS_1,		                \
@@ -351,10 +351,10 @@ static const struct uart_sf32lb_config uart_sf32lb_cfg_##index = {	\
 };									\
 \
 static struct uart_sf32lb_data uart_sf32lb_data_##index = {	\
-	.uart_cfg = &uart_cfg_##index,					\
+	.uart_cfg = uart_cfg_##index,					\
     .base_addr = DT_INST_REG_ADDR(index)            \
 };\
-\			
+\
 DEVICE_DT_INST_DEFINE(index,						                \
 		    uart_sf32lb_init,					                    \
 		    PM_DEVICE_DT_INST_GET(index),			                \

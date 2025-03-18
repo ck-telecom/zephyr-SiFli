@@ -3,6 +3,7 @@
 zephyr_compile_definitions(
   -DSF32LB52X
   -DSOC_SF32LB52X
+  -DNONE_HAL_TICK_INIT
 )
 
 zephyr_include_directories(${ZEPHYR_BASE}/drivers)

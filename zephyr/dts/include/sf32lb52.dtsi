@@ -23,7 +23,7 @@
 / {
 	chosen {
 		//zephyr,entropy = &rng1;
-		zephyr,flash-controller = &flash3;
+		zephyr,flash-controller = &flash2;
 	};
 
 	cpus {
@@ -68,7 +68,7 @@
 
 	sram0: memory@20000000 {
 		compatible = "mmio-sram";
-        reg = <0x20000000 800000>;
+        reg = <0x20000000 524288>;
 	};
 
 	clocks {
@@ -100,7 +100,7 @@
 
 	soc {
 		mpi1: psram-controller@50041000 {
-			compatible = "sifli,mpi-controller", "sifli,sf32lb56-flash-controller";
+			compatible = "sifli,mpi-controller", "sifli,sf32lb52-flash-controller";
 			reg = <0x50041000 0x1000>;
 			//clocks = <&rcc SF32LB_CLOCK(AHB1, 8U)>;
 
@@ -113,16 +113,16 @@
 			};
 		};
 		mpi2: flash-controller@50042000 {
-			compatible = "sifli,mpi-controller", "sifli,sf32lb56-flash-controller";
+			compatible = "sifli,mpi-controller", "sifli,sf32lb52-flash-controller";
 			reg = <0x50042000 0x1000>;
 			//clocks = <&rcc SF32LB_CLOCK(AHB1, 8U)>;
 
 			#address-cells = <1>;
 			#size-cells = <1>;
 
-			flash3: mpi2@12000000 {
+			flash2: mpi2@12020000 {
 				compatible = "sifli,nv-flash", "soc-nv-flash";
-                reg = <0x12000000 0x1000000>;
+                reg = <0x12020000 0x1000000>;
 				write-block-size = <8>;
 				erase-block-size = <4096>;				
 			};

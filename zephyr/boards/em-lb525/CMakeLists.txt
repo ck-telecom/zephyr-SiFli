@@ -18,4 +18,5 @@ zephyr_code_relocate(FILES ../../../SifliSDK/customer/boards/eh-lb52xu/bsp_init.
 zephyr_code_relocate(FILES ../../../SifliSDK/customer/boards/eh-lb52xu/bsp_lcd_tp.c LOCATION RAM NOKEEP)
 zephyr_code_relocate(FILES ../../../SifliSDK/customer/boards/eh-lb52xu/bsp_pinmux.c LOCATION RAM NOKEEP)
 zephyr_code_relocate(FILES ../../../SifliSDK/customer/boards/eh-lb52xu/bsp_power.c LOCATION RAM NOKEEP)
-zephyr_code_relocate(FILES ../../../SifliSDK/customer/boards/eh-lb52xu/bsp_power.c LOCATION RAM NOKEEP)
+zephyr_code_relocate(FILES ../../../SifliSDK/customer/boards/common/bsp_common.c ".*\\HAL_MspInit" LOCATION RAM NOKEEP)
+

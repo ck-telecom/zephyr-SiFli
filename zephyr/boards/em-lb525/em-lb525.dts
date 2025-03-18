@@ -17,7 +17,7 @@
 		zephyr,console = &usart1;
 		zephyr,shell-uart = &usart1;
 		zephyr,sram = &sram0;
-		zephyr,flash = &psram1;
+		zephyr,flash = &flash2;
 	};
 
 //	leds: leds {
