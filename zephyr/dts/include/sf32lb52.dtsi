@@ -24,6 +24,7 @@
 	chosen {
 		//zephyr,entropy = &rng1;
 		zephyr,flash-controller = &flash2;
+        zephyr,bt-hci = &mbox;
 	};
 
 	cpus {
@@ -113,16 +114,16 @@
 			};
 		};
 		mpi2: flash-controller@50042000 {
-			compatible = "sifli,mpi-controller", "sifli,sf32lb52-flash-controller";
+			compatible = "sifli,mpi-controller", "sifli,sf32lb-flash-controller";
 			reg = <0x50042000 0x1000>;
 			//clocks = <&rcc SF32LB_CLOCK(AHB1, 8U)>;
 
 			#address-cells = <1>;
 			#size-cells = <1>;
 
-			flash2: mpi2@12020000 {
+			flash2: mpi2@12000000 {
 				compatible = "sifli,nv-flash", "soc-nv-flash";
-                reg = <0x12020000 0x1000000>;
+                reg = <0x12000000 0x1000000>;
 				write-block-size = <8>;
 				erase-block-size = <4096>;				
 			};
@@ -221,6 +222,27 @@
 			interrupt-names = "wakeup";
 			status = "disabled";
 		};
+
+		radio: radio@40090000 {
+			compatible = "sifli,sf-bt-radio";
+			reg = <0x40090000 0x1000>;
+			interrupts = <1 1>;
+			status = "okay";
+			ble-2mbps-supported;
+			tx-high-power-supported;
+		};
+       
+        mbox: mbox@50082000 {
+            compatible = "sifli,bt-mbox";
+            reg = <0x50082000 0x1000>;
+            interrupts = <58 1>;
+            status = "okay";            
+        };        
+
+        sram0_shared: memory@2007fc00 {
+            /* Last 1 kB of sram0 */
+            reg = <0x2007fc00 0x400>;
+        };
 
 		//rng1: rng@4000F000 {
 		//	compatible = "sifli,rng";
