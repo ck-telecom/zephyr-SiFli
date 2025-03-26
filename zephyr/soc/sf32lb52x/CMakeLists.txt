@@ -12,6 +12,10 @@ zephyr_sources(
   soc.c
   )
 
+zephyr_sources(
+  lcpu.c
+  )
+  
 zephyr_sources_ifdef(CONFIG_PM
   power.c
   )

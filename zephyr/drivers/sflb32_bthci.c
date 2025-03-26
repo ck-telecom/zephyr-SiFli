@@ -22,7 +22,7 @@
 #include <zephyr/bluetooth/hci.h>
 #include <zephyr/drivers/bluetooth.h>
 
-#define LOG_LEVEL LOG_LEVEL_DBG
+#define LOG_LEVEL CONFIG_BT_HCI_DRIVER_LOG_LEVEL
 #include <zephyr/logging/log.h>
 LOG_MODULE_REGISTER(bt_driver);
 
@@ -343,13 +343,16 @@ static void rx_thread(void *p1, void *p2, void *p3)
 
     while (1)
     {
+        int len;
         k_sem_take(&(data->sem), K_FOREVER);
-        while (ipc_queue_get_rx_size(mbox_env.ipc_port))
+        len=ipc_queue_get_rx_size(mbox_env.ipc_port);
+        while (len)
         {
+            LOG_DBG("rx_thread len %d", len);
             struct h4_data *h4 = dev->data;
             struct net_buf *buf;
             process_rx(dev);
-            buf = k_fifo_get(&h4->rx.fifo, K_FOREVER);
+            buf = k_fifo_get(&h4->rx.fifo, K_NO_WAIT);
             while (buf)
             {
                 LOG_DBG("Calling bt_recv(%p),len=%d,data=%p", (void*)buf, buf->len, (void*)buf->data);
@@ -368,6 +371,7 @@ static void rx_thread(void *p1, void *p2, void *p3)
                 }
                 buf = k_fifo_get(&h4->rx.fifo, K_NO_WAIT);
             };
+            len=ipc_queue_get_rx_size(mbox_env.ipc_port);
         }
         process_tx(dev);
     }
@@ -576,7 +580,7 @@ static inline void process_tx(const struct device *dev)
         h4->tx.buf = k_fifo_get(&h4->tx.fifo, K_NO_WAIT);
         if (!h4->tx.buf)
         {
-            LOG_ERR("TX interrupt but no pending buffer!");
+            //LOG_ERR("TX interrupt but no pending buffer!");
             uart_irq_tx_disable(cfg->uart);
             return;
         }
@@ -711,10 +715,8 @@ static int h4_open(const struct device *dev, bt_hci_recv_t recv)
     const struct h4_config *cfg = dev->config;
     k_tid_t tid;
 
-    LOG_DBG("h4 open %p", (void*)recv);
     zbt_config_mailbox();
-    lcpu_power_on();
-    h4->recv = recv;
+    LOG_DBG("h4 open %p", (void*)recv);
     tid = k_thread_create(cfg->rx_thread, cfg->rx_thread_stack,
                           cfg->rx_thread_stack_size,
                           rx_thread, (void *)dev, NULL, NULL,
@@ -722,6 +724,9 @@ static int h4_open(const struct device *dev, bt_hci_recv_t recv)
                           0, K_NO_WAIT);
     k_thread_name_set(tid, "hci_rx_th");
     k_thread_start(tid);
+    lcpu_power_on();
+    k_sleep(K_MSEC(50));
+    h4->recv = recv;
     return 0;
 }
 
@@ -865,6 +870,7 @@ static int32_t mbox_rx_ind(ipc_queue_handle_t handle, size_t size)
 {
     struct h4_data *h4 = &h4_data_0;
 
+    LOG_DBG("mbox_rx_ind");
     k_sem_give(&(h4->sem));
     return 0;
 }
@@ -906,9 +912,10 @@ int zbt_config_mailbox(void)
     q_cfg.rx_ind = NULL;
     q_cfg.user_data = 0;
 
-    if (q_cfg.rx_ind == NULL)
+    if (q_cfg.rx_ind == NULL) {
         q_cfg.rx_ind = mbox_rx_ind;
-
+    }
+    
 	IRQ_CONNECT(DT_INST_IRQN(0), DT_INST_IRQ(0, priority), mbox_sf32lb_isr, DEVICE_DT_INST_GET(0),0);
     mbox_env.ipc_port = ipc_queue_init(&q_cfg);
     __ASSERT(IPC_QUEUE_INVALID_HANDLE != mbox_env.ipc_port, "Invalid Handle");

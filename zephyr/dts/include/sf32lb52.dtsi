@@ -12,9 +12,9 @@
 #include <zephyr/dt-bindings/gpio/gpio.h>
 #include <zephyr/dt-bindings/pwm/pwm.h>
 #include <zephyr/dt-bindings/adc/adc.h>
+#include <zephyr/dt-bindings/memory-attr/memory-attr-arm.h>
 #include <freq.h>
 #include <mem.h>
-
 #define SF32LB_CLOCK(a,b)
 #define SF32LB_RESET(a,b)
 #define SF32LB_SRC_MSI 
@@ -69,7 +69,7 @@
 
 	sram0: memory@20000000 {
 		compatible = "mmio-sram";
-        reg = <0x20000000 524288>;
+        reg = <0x20000000 DT_SIZE_K(511)>;
 	};
 
 	clocks {
@@ -241,9 +241,22 @@
 
         sram0_shared: memory@2007fc00 {
             /* Last 1 kB of sram0 */
-            reg = <0x2007fc00 0x400>;
+       		compatible = "zephyr,memory-region", "mmio-sram";
+            reg = <0x2007fc00 DT_SIZE_K(1)>;
+            device_type = "memory";
+            zephyr,memory-region = "sram0_shared";
+            zephyr,memory-attr = <(DT_MEM_ARM(ATTR_MPU_RAM_NOCACHE))>;
         };
 
+        sram1_shared: memory@20400000 {
+            /* Last 1 kB of sram0 */
+       		compatible = "zephyr,memory-region", "mmio-sram";
+            reg = <0x20400000 DT_SIZE_K(64)>;
+            device_type = "memory";
+            zephyr,memory-region = "sram1_shared";
+            zephyr,memory-attr = <(DT_MEM_ARM(ATTR_MPU_RAM_NOCACHE))>;
+        };
+        
 		//rng1: rng@4000F000 {
 		//	compatible = "sifli,rng";
 		//	reg = <0x4000F000 0x400>;
