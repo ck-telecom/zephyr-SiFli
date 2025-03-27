@@ -5,12 +5,14 @@
 - Add "sifli	SiFli, Inc." in <zephyrproject>\zephyr\dts\bindings\vendor-prefixes.txt
 
 ## Build with west 
+```
 west build -b <board> <project>  -- -DBOARD_ROOT=<zephyrproject>\modules\hal\sifli\zephyr -DSOC_ROOT=<zephyrproject>\modules\hal\sifli\zephyr  -DDTS_ROOT_BINDINGS=<zephyrproject>\modules\hal\sifli\zephyr\dts\bindings
+```
+
 Validated project including: 
-    - zephyr\samples\bluetooth\peripheral
-    - zephyr\samples\hello_world
+- zephyr\samples\bluetooth\peripheral
+- zephyr\samples\hello_world
 
 ## Note: 
-    - Currently board support em-lb525, 
-    - Firmware Download tool currently only support Window platform
-      use zephyrproject\modules\hal\sifli\zephyr\scripts\sfflash.bat to download firmware to board.
+- Currently board support em-lb525, 
+- Firmware Download tool currently only support Window platform. Use zephyrproject\modules\hal\sifli\zephyr\scripts\sfflash.bat to download firmware to board.
