@@ -14,5 +14,6 @@ rsource "i2c/Kconfig"
 rsource "pinctrl/Kconfig"
 rsource "rtc/Kconfig"
 rsource "serial/Kconfig"
+rsource "watchdog/Kconfig"
 
 endmenu
