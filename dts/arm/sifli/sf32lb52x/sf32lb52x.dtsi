@@ -238,11 +238,10 @@
 		};
 
 		wdt1: watchdog@50094000 {
-			compatible = "sifli,watchdog";
+			compatible = "sifli,sf32lb-watchdog";
 			reg = <0x50094000 0x400>;
-			status = "disabled";
-			//clocks = <&rcc RCC_CLK_WDT1>;
 			interrupts = <0 7>;
+			status = "disabled";
 		};
 
 		usart1: serial@50084000 {
